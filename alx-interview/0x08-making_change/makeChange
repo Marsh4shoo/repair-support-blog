@@ -1,0 +1,25 @@
+def makeChange(coins, total):
+    # If total is 0 or less, no coins are needed
+    if total <= 0:
+        return 0
+    
+    # Sort coins in descending order to try the largest ones first
+    coins.sort(reverse=True)
+    
+    # Initialize the counter for coins used
+    coin_count = 0
+
+    # Iterate through each coin denomination
+    for coin in coins:
+        # If the coin can be used, calculate how many times it fits into the remaining total
+        if total >= coin:
+            coin_count += total // coin  # Add the number of coins used
+            total %= coin  # Update the remaining total
+
+        # If the remaining total is zero, return the count of coins used
+        if total == 0:
+            return coin_count
+    
+    # If total is not zero after trying all coins, return -1
+    return -1
+
